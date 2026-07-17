@@ -19,6 +19,8 @@ import { dashboardNav, adminNav, siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+export const dynamic = "force-dynamic";
+
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   LayoutDashboard,
   ScanSearch,

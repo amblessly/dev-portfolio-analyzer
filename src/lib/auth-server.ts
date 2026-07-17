@@ -7,6 +7,17 @@ export async function getSession() {
   try {
     return await auth.api.getSession({ headers: await headers() });
   } catch (err) {
+    // Next.js throws DYNAMIC_SERVER_USAGE when a route uses `headers()`
+    // during static generation — it must bubble up so the route opts out
+    // of static rendering. Re-throw it; only swallow genuine auth errors.
+    if (
+      err &&
+      typeof err === "object" &&
+      "digest" in err &&
+      (err as { digest?: string }).digest === "DYNAMIC_SERVER_USAGE"
+    ) {
+      throw err;
+    }
     console.error("[auth] getSession failed:", err);
     return null;
   }
