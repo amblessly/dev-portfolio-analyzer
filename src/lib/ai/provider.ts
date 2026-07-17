@@ -24,6 +24,7 @@ type ProviderConfig = {
 
 function buildConfig(): ProviderConfig {
   const provider = env.AI_PROVIDER;
+  const model = env.MODEL ?? env.AI_MODEL;
   if (provider === "openrouter") {
     return {
       client: env.OPENROUTER_API_KEY
@@ -32,13 +33,13 @@ function buildConfig(): ProviderConfig {
             baseURL: "https://openrouter.ai/api/v1",
           })
         : null,
-      model: env.AI_MODEL,
+      model,
       provider,
     };
   }
   return {
     client: env.OPENAI_API_KEY ? new OpenAI({ apiKey: env.OPENAI_API_KEY }) : null,
-    model: env.AI_MODEL,
+    model,
     provider,
   };
 }

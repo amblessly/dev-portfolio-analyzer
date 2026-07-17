@@ -16,6 +16,7 @@ const envSchema = z.object({
   OPENROUTER_API_KEY: z.string().optional(),
   AI_PROVIDER: z.enum(["openai", "openrouter"]).default("openai"),
   AI_MODEL: z.string().default("gpt-4o-mini"),
+  MODEL: z.string().optional(),
 
   BLOB_READ_WRITE_TOKEN: z.string().optional(),
   UPLOADTHING_TOKEN: z.string().optional(),
